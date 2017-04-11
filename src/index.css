@@ -1,0 +1,133 @@
+.Logo {
+    left: 15%;
+    height: 70px !important;
+}
+
+.LogoName {
+    left: 30%;
+}
+
+.header {
+    margin: 0;
+    padding: 0;
+}
+
+.MyHeader img {
+    top: 15px;
+    position: fixed;
+    height: 80px;
+}
+
+.container {
+    align-items: flex-start;
+}
+
+.MyHeader .buttons {
+    position: fixed;
+    left: 70%;
+    top: 33px;
+}
+
+.MyHeader {
+    background-color: #337ab7;
+    border: solid #000000;
+    border-width: 0 0 1px 0;
+    height: 100px;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    padding: 0;
+}
+
+.list-group-item.active,
+.list-group-item.active:hover,
+.list-group-item.active:focus {
+    z-index: 0;
+}
+
+.row {
+    height: auto;
+    width: 100%;
+    padding: 1%;
+}
+
+.container {
+    padding: 0;
+    width: 100%;
+}
+
+.first {
+    padding-top: 5%;
+}
+
+.SidePanel {
+    position: fixed;
+
+}
+
+.bm-burger-button {
+    position: fixed;
+    width: 36px;
+    height: 36px;
+    left: 36px;
+    top: 36px;
+    z-index: 2 !important;
+}
+
+.bm-menu {
+    background: #373a47;
+    fontSize: 1.15em;
+}
+
+.bm-menu-wrap {
+    width: 25% !important;
+    background: #373a47;
+    padding: 2.5em 1.5em 0;
+    fontSize: 1.15em;
+    z-index: 3 !important;
+}
+
+.bm-item-list {
+    color: #b8b7ad;
+    padding: 0.8em;
+}
+
+.bm-item-list a {
+    padding: 0.8em;
+}
+
+.bm-item-list span {
+    margin-left: 10px;
+    font-weight: 700;
+}
+
+.bm-cross-button {
+    height: 24px;
+    width: 24px;
+}
+
+.bm-cross {
+    background: #bdc3c7;
+}
+
+.bm-burger-bars {
+    background: #000000;
+    border: solid 1px #000000;
+}
+
+.bm-morph-shape {
+    fill: #373a47;
+}
+
+.bm-overlay {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+#page-wrap {
+    z-index: 0;
+}
+
+
+
