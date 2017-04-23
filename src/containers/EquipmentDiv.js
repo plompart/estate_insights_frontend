@@ -7,7 +7,7 @@ import Equipment from '../components/Equipment';
 import {changeCheckboxData} from "../actions/index";
 
 const mapDispatchToProps = (dispatch) => {
-  debugger;
+  // debugger;
   return {
     onChange: (prop, value) => {
       dispatch(changeCheckboxData(prop, value));

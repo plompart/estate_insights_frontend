@@ -3,7 +3,7 @@ import {
   withGoogleMap,
   GoogleMap, Marker,
 } from "react-google-maps";
-import icon from './icon.png';
+// import icon from './icon.png';
 
 const SimpleMapExampleGoogleMap = withGoogleMap(props => {
   return (

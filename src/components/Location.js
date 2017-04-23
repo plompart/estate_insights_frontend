@@ -4,6 +4,7 @@
 
 import React, {Component} from 'react';
 import {FormControl, FormGroup, ListGroup, ListGroupItem} from "react-bootstrap";
+import Test from './Test';
 
 class Location extends Component {
   constructor(props){
@@ -14,6 +15,7 @@ class Location extends Component {
   render() {
     return (
       <ListGroup>
+        <Test testProps="testPropsssssy" />
         <ListGroupItem active>Lokalizacja</ListGroupItem>
         <ListGroupItem>
           <FormGroup>
