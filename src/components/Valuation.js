@@ -8,6 +8,7 @@ class Valuation extends Component {
       <div className="Valuation">
         <ListGroup>
           <ListGroupItem active>Twoja wycena:</ListGroupItem>
+            {console.log(this.props.wycena)}
           <ListGroupItem>Wartość mieszkania: {this.props.wycena ? this.props.wycena : <span>Ładuję</span>}</ListGroupItem>
           <ListGroupItem>Wartość m2: 10 000 zł</ListGroupItem>
           <ListGroupItem>Wartość m2 w okolicy: 10 000 zł</ListGroupItem>
