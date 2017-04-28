@@ -22,12 +22,6 @@
     align-items: flex-start;
 }
 
-.MyHeader .buttons {
-    position: fixed;
-    left: 70%;
-    top: 33px;
-}
-
 .MyHeader {
     background-color: #337ab7;
     border: solid #000000;

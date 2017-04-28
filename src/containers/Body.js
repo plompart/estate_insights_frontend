@@ -56,11 +56,6 @@ class Body extends Component {
                 </Col>
               </Row>
               <Row className="show-grid">
-                <Col xs={12} md={8} xsOffset={3} mdOffset={2}>
-                  <LineGraph/>
-                </Col>
-              </Row>
-              <Row className="show-grid">
                 <Col xs={6} md={4} xsOffset={3} mdOffset={2}>
                   <BarGraph type="prices"/>
                 </Col>

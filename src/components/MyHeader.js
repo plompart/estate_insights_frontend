@@ -3,7 +3,7 @@
  */
 
 import React, {Component} from 'react';
-import {Button, Image} from "react-bootstrap";
+import { Image} from "react-bootstrap";
 import logo from '../logo.png';
 
 class MyHeader extends Component {
@@ -11,10 +11,6 @@ class MyHeader extends Component {
     return (
       <div className="MyHeader">
         <Image src={logo} rounded className="Logo" alt="Logo"/>
-        <div className="buttons">
-          <Button>Zaloguj się</Button>
-          <Button>Zarejestruj</Button>
-        </div>
       </div>
     );
   }
