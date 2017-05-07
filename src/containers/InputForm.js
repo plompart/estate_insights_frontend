@@ -7,10 +7,11 @@ import {Button, Col, Grid, PageHeader, Row} from "react-bootstrap";
 import MyHeader from "../components/MyHeader";
 import ReactDOM from "react-dom";
 import Body from "./Body";
-import {Provider} from "react-redux";
+import {Provider, connect} from "react-redux";
 import LocationDiv from "./LocationDiv";
 import MainInfoDiv from "../containers/MainInfoDiv";
 import EquipmentDiv from "../containers/EquipmentDiv";
+import {submitData} from "../actions/index"
 
 class InputForm extends Component {
   onChangeHandler(propName, event) {
@@ -30,7 +31,8 @@ class InputForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      buildingType: "blok"
+      buildingType: "blok",
+
     };
   }
 
@@ -61,10 +63,13 @@ class InputForm extends Component {
           </Row>
           <Row className="show-grid" >
             <Col xs={12} md={8} xsOffset={3} mdOffset={2} style={{textAlign: "center"}}>
-              <Button onClick={() => ReactDOM.render(<Provider store={this.props.store}>
-                                                      <Body />
-                                                    </Provider>, document.getElementById('body'))}>
-                Zapisz
+              <Button onClick={() => {
+                this.props.submitData();
+                ReactDOM.render(<Provider store={this.props.store}>
+                    <Body />
+                  </Provider>, document.getElementById('body'))
+              }}>
+                Wyceń
               </Button>
             </Col>
           </Row>
@@ -74,4 +79,12 @@ class InputForm extends Component {
   }
 }
 
-export default InputForm;
+const mapStateToProps = (state) => state;
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    submitData: () => dispatch(submitData())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(InputForm)
