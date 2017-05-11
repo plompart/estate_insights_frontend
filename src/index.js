@@ -8,8 +8,6 @@ import './index.css';
 import InputForm from "./containers/InputForm";
 import store from "./reducers/index";
 import {Provider} from 'react-redux';
-import {createStore} from 'redux';
-
 
 ReactDOM.render(<Provider store={store}>
                   <InputForm store={store}/>

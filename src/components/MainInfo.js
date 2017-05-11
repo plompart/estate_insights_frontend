@@ -3,7 +3,9 @@
  */
 
 import React, {Component} from 'react';
-import {FormControl, FormGroup, ListGroup, ListGroupItem} from "react-bootstrap";
+import {ListGroup, ListGroupItem} from "react-bootstrap";
+import {Errors, Form, Control, Field} from "react-redux-form";
+import {isRoomCorrect, isFloorCorrect, isNumber, required} from "../rules/index";
 
 class MainInfo extends Component {
   render() {
@@ -11,23 +13,79 @@ class MainInfo extends Component {
       <ListGroup>
         <ListGroupItem active>Informacje główne</ListGroupItem>
         <ListGroupItem>
-          <FormGroup>
-            <FormControl type="text" placeholder="powierzchnia"
-                         onBlur={(event) => this.props.onBlur("area", event.target.value)}
-            />
-            <FormControl type="text" placeholder="liczba pokoi"
-                         onBlur={(event) => this.props.onBlur("roomNumber", event.target.value)}
-            />
-            <FormControl type="text" placeholder="nr piętra"
-                         onBlur={(event) => this.props.onBlur("floor", event.target.value)}
-            />
-            <FormControl componentClass="select" placeholder="Rodzaj zabudowy"
-                         onBlur={(event) => this.props.onBlur("buildingType", event.target.value)}>
-              <option value="blok">blok</option>
-              <option value="kamienica">kamienica</option>
-              <option value="apartamentowiec">apartamentowiec</option>
-            </FormControl>
-          </FormGroup>
+          <Form model="form.inputForm" onSubmit={{}}>
+            <div className="field">
+              <Control.text
+                placeholder="powierzchnia"
+                onBlur={(event) => this.props.onBlur("area", event.target.value)}
+                model=".area"
+                validators={{
+                  //required,
+                  isNumber,
+                }}
+              />
+              <Errors
+                className="errors"
+                model="form.inputForm.area"
+                show="touched"
+                messages={{
+                  //required: 'Pole wymagane',
+                  isNumber: 'Musi być liczbą',
+                }}
+              />
+            </div>
+            <div className="field">
+              <Control.text
+                placeholder="liczba pokoi"
+                onBlur={(event) => this.props.onBlur("roomNumber", event.target.value)}
+                model=".roomNumber"
+                validators={{
+                  //required,
+                  isRoomCorrect,
+                  isNumber,
+                }}
+              />
+              <Errors
+                className="errors"
+                model="form.inputForm.roomNumber"
+                show="touched"
+                messages={{
+                  //required: 'Pole wymagane',
+                  isNumber: "Musi być liczbą",
+                  isRoomCorrect: 'Zła liczba pokoi',
+                }}
+              />
+            </div>
+            <div className="field">
+              <Control.text
+                placeholder="numer piętra"
+                onBlur={(event) => this.props.onBlur("floor", event.target.value)}
+                model=".floor"
+                validators={{
+                  //required,
+                  isNumber,
+                  isFloorCorrect,
+                }}
+              />
+              <Errors
+                className="errors"
+                model="form.inputForm.floor"
+                show="touched"
+                messages={{
+                  //required: 'Pole wymagane',
+                  isNumber: "Musi być liczbą",
+                  isFloorCorrect: 'Zły numer piętra',
+                }}
+              />
+            </div>
+            <Field model="form.inputForm.buildingType">
+              <select onBlur={(event) => this.props.onBlur("buildingType", event.target.value)}>
+                <option value="blok">blok</option>
+                <option value="kamienica">kamienica</option>
+                <option value="apartamentowiec">apartamentowiec</option>
+              </select>
+            </Field>
+          </Form>
         </ListGroupItem>
       </ListGroup>
     )

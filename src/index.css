@@ -123,5 +123,25 @@
     z-index: 0;
 }
 
+.errors span{
+    font-weight: bold;
+    display: block;
+    box-sizing: border-box;
+    margin: 5px;
+    color: red;
+}
+
+input[type=text] {
+    border: 1px solid;
+    padding: 0.5rem;
+    width: 100%;
+    border-radius: 4px;
+}
+
+select {
+    width: 100%;
+    height: 30px;
+    border-radius: 4px;
+}
 
 

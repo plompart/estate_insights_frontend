@@ -7,11 +7,11 @@ import LocationView from '../components/LocationView';
 
 const mapStateToProps = (state) => {
   return {
-    city: state.inputData.city,
-    road: state.inputData.road,
-    houseNumber: state.inputData.houseNumber
+    city: state.form.inputForm.city,
+    road: state.form.inputForm.road,
+    houseNumber: state.form.inputForm.houseNumber
   }
-}
+};
 
 const LocationViewDiv = connect(mapStateToProps, null)(LocationView);
 

@@ -8,6 +8,8 @@ import {Button} from "react-bootstrap";
 import LocationDiv from "./LocationDiv";
 import MainInfoDiv from "./MainInfoDiv";
 import EquipmentDiv from "./EquipmentDiv";
+import {submitData} from "../actions/index"
+import {connect} from "react-redux";
 
 var MenuWrap = React.createClass({
 
@@ -76,11 +78,23 @@ class SidePanel extends Component {
           <LocationDiv/>
           <MainInfoDiv/>
           <EquipmentDiv/>
-          <Button >Zapisz zmiany</Button>
+          <Button onClick={() => {
+            this.props.submitData();
+          }
+
+          }>Zapisz zmiany</Button>
         </Menu>
       </MenuWrap>
     );
   }
 }
 
-export default SidePanel;
+const mapStateToProps = (state) => state;
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    submitData: () => dispatch(submitData())
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SidePanel)

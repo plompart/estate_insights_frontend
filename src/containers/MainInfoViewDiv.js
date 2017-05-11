@@ -7,10 +7,10 @@ import MainInfoView from '../components/MainInfoView';
 
 const mapStateToProps = (state) => {
   return {
-    area: state.inputData.area,
-    roomNumber: state.inputData.roomNumber,
-    floor: state.inputData.floor,
-    buildingType: state.inputData.buildingType
+    area: state.form.inputForm.area,
+    roomNumber: state.form.inputForm.roomNumber,
+    floor: state.form.inputForm.floor,
+    buildingType: state.form.inputForm.buildingType
   }
 }
 

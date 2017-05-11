@@ -7,13 +7,40 @@ import { createStore, applyMiddleware, combineReducers, getInitialState } from '
 import inputData from './inputData'
 import checkboxData from './checkboxData'
 import ReduxPromise from 'redux-promise'
+import {combineForms} from "react-redux-form";
+
+const location = {
+  city: '',
+  road: '',
+  houseNumber: ''
+};
+
+const mainInfo = {
+  area: '',
+  roomNumber: '',
+  floor: '',
+  buildingType: ''
+};
+
+const inputForm = {
+  city: '',
+  road: '',
+  houseNumber: '',
+  area: '',
+  roomNumber: '',
+  floor: '',
+  buildingType: 'blok',
+};
+
 const reducer = combineReducers({
   inputData,
-  checkboxData
+  checkboxData,
+  form: combineForms({
+      inputForm
+  },'form'),
 });
 
 // const store = createStore(reducer, {}, applyMiddleware(thunkMiddleware));
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 export default createStoreWithMiddleware(reducer);
-// export default store;
