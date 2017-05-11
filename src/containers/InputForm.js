@@ -8,9 +8,9 @@ import MyHeader from "../components/MyHeader";
 import ReactDOM from "react-dom";
 import Body from "./Body";
 import {Provider, connect} from "react-redux";
-import LocationDiv from "./LocationDiv";
-import MainInfoDiv from "../containers/MainInfoDiv";
-import EquipmentDiv from "../containers/EquipmentDiv";
+import Location from "../components/Location";
+import MainInfo from "../components/MainInfo";
+import Equipment from "../components/Equipment";
 import {submitData} from "../actions/index"
 import {Form} from "react-redux-form";
 
@@ -40,24 +40,21 @@ class InputForm extends Component {
                 <Body />
               </Provider>, document.getElementById('body'))
             }}
-            onSumbitFailed={(userForm) => {
-              console.log(userForm);
-            }}
           >
             <Row className="show-grid first">
               <Col xs={12} md={8} xsOffset={3} mdOffset={2}>
                 <PageHeader>Wypełnij formularz by uzyskać wycenę mieszkania:</PageHeader>
-                <LocationDiv/>
+                <Location/>
               </Col>
             </Row>
             <Row className="show-grid">
               <Col xs={12} md={8} xsOffset={3} mdOffset={2}>
-                <MainInfoDiv/>
+                <MainInfo/>
               </Col>
             </Row>
             <Row className="show-grid">
               <Col xs={12} md={8} xsOffset={3} mdOffset={2}>
-                <EquipmentDiv/>
+                <Equipment/>
               </Col>
             </Row>
             <Row className="show-grid" >

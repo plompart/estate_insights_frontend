@@ -2,25 +2,12 @@
  * Created by Patryk on 2017-04-09.
  */
 
-import { createStore, applyMiddleware, combineReducers, getInitialState } from 'redux'
+import {createStore, applyMiddleware, combineReducers} from 'redux'
 
-import inputData from './inputData'
+import valuation from './valuation'
 import checkboxData from './checkboxData'
 import ReduxPromise from 'redux-promise'
 import {combineForms} from "react-redux-form";
-
-const location = {
-  city: '',
-  road: '',
-  houseNumber: ''
-};
-
-const mainInfo = {
-  area: '',
-  roomNumber: '',
-  floor: '',
-  buildingType: ''
-};
 
 const inputForm = {
   city: '',
@@ -33,7 +20,7 @@ const inputForm = {
 };
 
 const reducer = combineReducers({
-  inputData,
+  valuation,
   checkboxData,
   form: combineForms({
       inputForm

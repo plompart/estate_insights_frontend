@@ -4,12 +4,12 @@
 
 import React, {Component} from 'react';
 import BurgerMenu from 'react-burger-menu';
-import {Button} from "react-bootstrap";
-import LocationDiv from "./LocationDiv";
-import MainInfoDiv from "./MainInfoDiv";
-import EquipmentDiv from "./EquipmentDiv";
+import Location from "../components/Location";
+import MainInfo from "../components/MainInfo";
+import Equipment from "../components/Equipment";
 import {submitData} from "../actions/index"
 import {connect} from "react-redux";
+import {Form} from "react-redux-form";
 
 var MenuWrap = React.createClass({
 
@@ -68,21 +68,25 @@ class SidePanel extends Component {
 
     return (
       <MenuWrap wait={20} side={this.state.side}>
-
         <Menu
           noOverlay id={this.state.currentMenu}
           pageWrapId={'page-wrap'}
           outerContainerId={'outer-container'}
         >
           {console.log(Menu)}
-          <LocationDiv/>
-          <MainInfoDiv/>
-          <EquipmentDiv/>
-          <Button onClick={() => {
-            this.props.submitData();
-          }
-
-          }>Zapisz zmiany</Button>
+          <Form
+            model="form.inputForm"
+            onSubmit={() => {
+              this.props.submitData();
+            }}
+          >
+            <Location/>
+            <MainInfo/>
+            <Equipment/>
+            <button type="submit" className="btn btn-default">
+              Wyceń
+            </button>
+          </Form>
         </Menu>
       </MenuWrap>
     );

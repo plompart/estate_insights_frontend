@@ -4,6 +4,8 @@
 
 import React, {Component} from "react";
 import {Checkbox, FormGroup, ListGroup, ListGroupItem} from "react-bootstrap";
+import {connect} from "react-redux";
+import {changeCheckboxData} from "../actions/index";
 
 let equipment = ['telewizja kablowa', 'internet', 'telefon', 'balkon ', 'winda',
   'garaż', 'pom. użytkowe', 'monitoring', 'meble ', 'teren zamknięty', 'lodówka ',
@@ -38,4 +40,18 @@ class Equipment extends Component {
   }
 }
 
-export default Equipment;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onChange: (prop, value) => {
+      dispatch(changeCheckboxData(prop, value));
+    }
+  }
+};
+
+const mapStateToProps = (state) => {
+  return {
+    checked: state.checkboxData
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Equipment);

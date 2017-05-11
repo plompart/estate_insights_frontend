@@ -6,6 +6,7 @@ import React, {Component} from 'react';
 import {ListGroup, ListGroupItem} from "react-bootstrap";
 import {Errors, Form, Control, Field} from "react-redux-form";
 import {isRoomCorrect, isFloorCorrect, isNumber, required} from "../rules/index";
+import {connect} from "react-redux";
 
 class MainInfo extends Component {
   render() {
@@ -92,4 +93,12 @@ class MainInfo extends Component {
   }
 }
 
-export default MainInfo;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onBlur: (prop, value) => {
+      //dispatch(changeInputData(prop, value));
+    }
+  }
+};
+
+export default connect(null, mapDispatchToProps)(MainInfo);

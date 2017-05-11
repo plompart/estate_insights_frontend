@@ -4,6 +4,7 @@
 
 import React, {Component} from 'react';
 import {ListGroup, ListGroupItem} from "react-bootstrap";
+import {connect} from "react-redux";
 
 class LocationView extends Component {
   render() {
@@ -18,4 +19,12 @@ class LocationView extends Component {
 }
 ;
 
-export default LocationView;
+const mapStateToProps = (state) => {
+  return {
+    city: state.form.inputForm.city,
+    road: state.form.inputForm.road,
+    houseNumber: state.form.inputForm.houseNumber
+  }
+};
+
+export default  connect(mapStateToProps, null)(LocationView);

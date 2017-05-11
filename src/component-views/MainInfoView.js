@@ -4,6 +4,7 @@
 
 import React, {Component} from 'react';
 import {ListGroup, ListGroupItem} from "react-bootstrap";
+import {connect} from "react-redux";
 
 class MainInfoView extends Component {
   render() {
@@ -19,4 +20,13 @@ class MainInfoView extends Component {
   }
 }
 
-export default MainInfoView;
+const mapStateToProps = (state) => {
+  return {
+    area: state.form.inputForm.area,
+    roomNumber: state.form.inputForm.roomNumber,
+    floor: state.form.inputForm.floor,
+    buildingType: state.form.inputForm.buildingType
+  }
+}
+
+export default connect(mapStateToProps, null)(MainInfoView);

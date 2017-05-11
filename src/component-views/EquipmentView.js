@@ -4,6 +4,7 @@
 
 import React, {Component} from "react";
 import {Checkbox, FormGroup, ListGroup, ListGroupItem} from "react-bootstrap";
+import {connect} from "react-redux";
 
 let equipment = ['telewizja kablowa', 'internet', 'telefon', 'balkon ', 'winda',
   'garaż', 'pom. użytkowe', 'monitoring', 'meble ', 'teren zamknięty', 'lodówka ',
@@ -32,4 +33,10 @@ class EquipmentView extends Component {
   }
 }
 
-export default EquipmentView;
+const mapStateToProps = (state) => {
+  return {
+    checked: state.checkboxData
+  }
+};
+
+export default connect(mapStateToProps, null)(EquipmentView);

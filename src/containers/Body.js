@@ -5,14 +5,13 @@
 import React, {Component} from 'react';
 import MyHeader from "../components/MyHeader";
 import {Col, Grid, PageHeader, Row} from "react-bootstrap";
-import MyMap from "../components/MyMap";
-import LocationViewDiv from "../containers/LocationViewDiv";
-import Valuation from "../components/Valuation";
-import EquipmentViewDiv from "../containers/EquipmentViewDiv";
-import LineGraph from "../components/LineGraph";
-import BarGraph from "../components/BarGraph";
+import MyMap from "../component-views/MyMap";
+import LocationView from "../component-views/LocationView";
+import Valuation from "../component-views/Valuation";
+import EquipmentView from "../component-views/EquipmentView";
+import BarGraph from "../component-views/BarGraph";
 import SidePanel from "./SidePanel";
-import MainInfoViewDiv from "../containers/MainInfoViewDiv";
+import MainInfoView from "../component-views/MainInfoView";
 
 class Body extends Component {
   render() {
@@ -42,17 +41,17 @@ class Body extends Component {
               </Row>
               <Row className="show-grid">
                 <Col xs={12} md={8} xsOffset={3} mdOffset={2}>
-                  <LocationViewDiv/>
+                  <LocationView/>
                 </Col>
               </Row>
               <Row className="show-grid">
                 <Col xs={12} md={8} xsOffset={3} mdOffset={2}>
-                  <MainInfoViewDiv/>
+                  <MainInfoView/>
                 </Col>
               </Row>
               <Row className="show-grid">
                 <Col xs={12} md={8} xsOffset={3} mdOffset={2}>
-                  <EquipmentViewDiv/>
+                  <EquipmentView/>
                 </Col>
               </Row>
               <Row className="show-grid">

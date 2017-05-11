@@ -6,6 +6,7 @@ import React, {Component} from 'react';
 import {ListGroup, ListGroupItem} from "react-bootstrap";
 import {Errors, Control} from "react-redux-form";
 import {isCracow, isString, isNumber, required} from "../rules/index";
+import {connect} from "react-redux";
 
 class Location extends Component {
   constructor(props){
@@ -87,4 +88,12 @@ class Location extends Component {
   }
 }
 
-export default Location;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onBlur: (prop, value) => {
+      //dispatch(changeInputData(prop, value));
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Location);
