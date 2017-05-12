@@ -19,7 +19,6 @@ class Valuation extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     valuation: state.valuation.valuation
   }

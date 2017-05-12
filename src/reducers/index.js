@@ -8,6 +8,7 @@ import valuation from './valuation'
 import checkboxData from './checkboxData'
 import ReduxPromise from 'redux-promise'
 import {combineForms} from "react-redux-form";
+import coordinates from "./coordinates";
 
 const inputForm = {
   city: '',
@@ -20,6 +21,7 @@ const inputForm = {
 };
 
 const reducer = combineReducers({
+  coordinates,
   valuation,
   checkboxData,
   form: combineForms({

@@ -23,3 +23,14 @@ export const changeCheckboxData = (prop, value) => {
     value: value
   }
 };
+
+export const submitCoordinates = () => {
+  let request = axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=` +
+    `${store.getState().form.inputForm.city}, ${store.getState().form.inputForm.road} ${store.getState().form.inputForm.houseNumber}` +
+    `&key=AIzaSyBAy-YhQIBsMI3tz7GhjjuAEYf2PCVCRF0`
+  );
+  return {
+    type: 'SUBMIT_COORDINATES',
+    payload: request
+  }
+};

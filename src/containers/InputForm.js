@@ -11,7 +11,7 @@ import {Provider, connect} from "react-redux";
 import Location from "../components/Location";
 import MainInfo from "../components/MainInfo";
 import Equipment from "../components/Equipment";
-import {submitData} from "../actions/index"
+import {submitCoordinates, submitData} from "../actions/index"
 import {Form} from "react-redux-form";
 
 class InputForm extends Component {
@@ -36,6 +36,7 @@ class InputForm extends Component {
             model="form.inputForm"
             onSubmit={() => {
               this.props.submitData();
+              this.props.submitCoordinates();
               ReactDOM.render(<Provider store={this.props.store}>
                 <Body />
               </Provider>, document.getElementById('body'))
@@ -75,7 +76,8 @@ const mapStateToProps = (state) => state;
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    submitData: () => dispatch(submitData())
+    submitData: () => dispatch(submitData()),
+    submitCoordinates: () => dispatch(submitCoordinates())
   }
 };
 

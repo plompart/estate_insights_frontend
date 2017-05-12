@@ -27,4 +27,4 @@ const mapStateToProps = (state) => {
   }
 };
 
-export default  connect(mapStateToProps, null)(LocationView);
+export default connect(mapStateToProps, null)(LocationView);

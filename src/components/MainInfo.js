@@ -14,7 +14,7 @@ class MainInfo extends Component {
       <ListGroup>
         <ListGroupItem active>Informacje główne</ListGroupItem>
         <ListGroupItem>
-          <Form model="form.inputForm" onSubmit={{}}>
+          <Form model="form.inputForm">
             <div className="field">
               <Control.text
                 placeholder="powierzchnia"
