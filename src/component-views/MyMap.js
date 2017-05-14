@@ -7,8 +7,6 @@ import {connect} from "react-redux";
 import {submitCoordinates} from "../actions/index";
 
 const SimpleMapExampleGoogleMap = withGoogleMap(props => {
-  console.log("props");
-  console.log(props);
   return (
     <GoogleMap
       defaultZoom={11}

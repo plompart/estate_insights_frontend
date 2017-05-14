@@ -5,41 +5,56 @@
 import React, {Component} from 'react';
 import {ListGroup, ListGroupItem} from "react-bootstrap";
 import {Bar} from "react-chartjs-2";
-
-let surfaceData = {
-  labels: ['< 20m2', '30-45 m2', '45-65 m2', '65-90 m2', '90-120 m2', '>120 m2'],
-  datasets: [
-    {
-      label: 'w procentach',
-      backgroundColor: 'rgba(0,99,132,0.2)',
-      borderColor: 'rgba(0,99,132,1)',
-      borderWidth: 1,
-      hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-      hoverBorderColor: 'rgba(255,99,132,1)',
-      data: [7.6, 28.6, 37.7, 16.0, 5.5, 2.7]
-    }
-  ]
-};
-
-let pricesData = {
-  labels: ['<5,5 tys/m2', '5,5-6,0 tys/m2', '6,0-7,0 tys/m2', '7,0-8,0 tys/m2', '8,0-9,0 tys/m2', '>5,5 tys/m2'],
-  datasets: [
-    {
-      label: 'w procentach',
-      backgroundColor: 'rgba(255,99,132,0.2)',
-      borderColor: 'rgba(255,99,132,1)',
-      borderWidth: 1,
-      hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-      hoverBorderColor: 'rgba(255,99,132,1)',
-      data: [8.9, 10.7, 26.7, 24.9, 14.8, 14.2]
-    }
-  ]
-};
+import {connect} from "react-redux";
 
 class BarGraph extends Component {
+  getProperData(){
+    let data = 'hist_price_per_sqm' === this.props.type ? this.props.hist_price_per_sqm : this.props.hist_area;
+    let keys = [];
+    let values = [];
+    for(let key in data){
+      keys.push(key);
+      values.push(data[key]);
+    }
+
+    if(values[values.length - 1] === null){
+      values.pop();
+      keys.pop();
+    }
+
+    let labels = [];
+    if(this.props.type === 'hist_price_per_sqm'){
+      labels.push( "< " + keys[0] + " tys/m2");
+      for(let i = 1; i < keys.length; i++){
+        labels.push(keys[i-1] + "-" + keys[i] + " tys/m2");
+      }
+    }else{
+      labels.push( "< " + keys[0] + " m2");
+      for(let i = 1; i < keys.length; i++){
+        labels.push(keys[i-1] + "-" + keys[i] + " m2");
+      }
+    }
+
+    return {
+      labels: labels,
+      datasets: [
+        {
+          label: 'w procentach',
+          backgroundColor: 'rgba(255,99,132,0.2)',
+          borderColor: 'rgba(255,99,132,1)',
+          borderWidth: 1,
+          hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+          hoverBorderColor: 'rgba(255,99,132,1)',
+          data: values
+        }
+      ]
+    }
+  }
+
   render() {
-    let title = 'prices' === this.props.type ? 'Rozkład cen sprzedaży mieszkań w mieście: Kraków' : 'Rozkład powierzchni sprzedaży mieszkań w mieście: Kraków';
-    let data = 'surfaces' === this.props.type ? surfaceData : pricesData;
+    let title = 'hist_price_per_sqm' === this.props.type ? 'Rozkład cen sprzedaży mieszkań w mieście: Kraków' : 'Rozkład powierzchni sprzedaży mieszkań w mieście: Kraków';
+    let data = this.getProperData();
+
     return (
       <div className="BarGraph">
         <ListGroup>
@@ -51,4 +66,11 @@ class BarGraph extends Component {
   }
 }
 
-export default BarGraph;
+const mapStateToProps = (state) => {
+  return {
+    hist_area: state.valuation.hist_area,
+    hist_price_per_sqm: state.valuation.hist_price_per_sqm
+  }
+};
+
+export default connect(mapStateToProps,null)(BarGraph);

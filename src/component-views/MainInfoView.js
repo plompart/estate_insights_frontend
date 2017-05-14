@@ -8,13 +8,31 @@ import {connect} from "react-redux";
 
 class MainInfoView extends Component {
   render() {
+    let obj = this.props;
+
+    let data = Object.keys(obj).map((key) => {
+      let name = "Rodzaj zabudowy: ";
+      let last = "";
+      if(key === "area"){
+        name = "Powierzchnia: ";
+        last = " m2";
+      }
+      if(key === "floor")name = "Piętro: ";
+      if(key === "roomNumber")name = "Liczba pokoi: ";
+
+      if(obj[key] !== "" && key !== "dispatch"){
+        return(
+          <ListGroupItem>{name}{obj[key]}{last}</ListGroupItem>
+        )
+      }else{
+        return null;
+      }
+    });
+
     return (
       <ListGroup>
         <ListGroupItem active>Informacje główne:</ListGroupItem>
-        <ListGroupItem>Powierzchnia: {this.props.area} m2</ListGroupItem>
-        <ListGroupItem>Pietro: {this.props.floor}</ListGroupItem>
-        <ListGroupItem>Liczba pokoi: {this.props.roomNumber}</ListGroupItem>
-        <ListGroupItem>rodzaj zabudowy: {this.props.buildingType}</ListGroupItem>
+        {data}
       </ListGroup>
     )
   }

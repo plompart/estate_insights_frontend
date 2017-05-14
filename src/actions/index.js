@@ -8,7 +8,9 @@ export const submitData = () => {
   let request = axios.get(`http://localhost:5000/predict?` +
     `area=${store.getState().form.inputForm.area}&` +
     `floor=${store.getState().form.inputForm.floor}&` +
-    `rooms=${store.getState().form.inputForm.roomNumber}`
+    `rooms=${store.getState().form.inputForm.roomNumber}&` +
+    `lat=${store.getState().coordinates.lat}&` +
+    `lon=${store.getState().coordinates.lng}`
   );
   return {
     type: 'SUBMIT_DATA',
@@ -31,6 +33,17 @@ export const submitCoordinates = () => {
   );
   return {
     type: 'SUBMIT_COORDINATES',
+    payload: request
+  }
+};
+
+export const submitHistData = (type) => {
+  let request = axios.get(`http://localhost:5000/` +
+    `${type}` + '?nb_bins=5&'
+    );
+
+  return {
+    type: type,
     payload: request
   }
 };

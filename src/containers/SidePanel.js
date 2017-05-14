@@ -77,8 +77,8 @@ class SidePanel extends Component {
           <Form
             model="form.inputForm"
             onSubmit={() => {
-              this.props.submitData();
               this.props.submitCoordinates();
+              this.props.submitData();
             }}
           >
             <Location/>

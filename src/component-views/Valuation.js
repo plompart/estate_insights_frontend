@@ -8,10 +8,9 @@ class Valuation extends Component {
       <div className="Valuation">
         <ListGroup>
           <ListGroupItem active>Twoja wycena:</ListGroupItem>
-            {console.log(this.props.valuation)}
-          <ListGroupItem>Wartość mieszkania: {this.props.valuation ? this.props.valuation : <span>Ładuję</span>}</ListGroupItem>
-          <ListGroupItem>Wartość m2: 10 000 zł</ListGroupItem>
-          <ListGroupItem>Wartość m2 w okolicy: 10 000 zł</ListGroupItem>
+          <ListGroupItem>Wartość mieszkania: {this.props.price ? Number(this.props.price).toFixed(2) + " zł" : <span>Ładuję</span>}</ListGroupItem>
+          <ListGroupItem>Wartość m2: {this.props.price_per_sqm ? Number(this.props.price_per_sqm).toFixed(2) + " zł": <span>Ładuję</span>}</ListGroupItem>
+          <ListGroupItem>Wartość m2 w okolicy: {this.props.mean_price_per_sqm ? Number(this.props.mean_price_per_sqm).toFixed(2) + " zł" : <span>Ładuję</span>}</ListGroupItem>
         </ListGroup>
       </div>
     );
@@ -20,7 +19,9 @@ class Valuation extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    valuation: state.valuation.valuation
+    price: state.valuation.price,
+    price_per_sqm: state.valuation.price_per_sqm,
+    mean_price_per_sqm: state.valuation.mean_price_per_sqm
   }
 };
 

@@ -20,20 +20,24 @@ class EquipmentView extends Component {
         );
       }
     });
-    return (
-      <ListGroup>
-        <ListGroupItem active>Wyposażenie</ListGroupItem>
-        <ListGroupItem>
-          <FormGroup>
-            {buttons}
-          </FormGroup>
-        </ListGroupItem>
-      </ListGroup>
-    )
+    if (Object.keys(this.props.checked).length !== 0) {
+      return (
+        <ListGroup>
+          <ListGroupItem active>Wyposażenie</ListGroupItem>
+          <ListGroupItem>
+            <FormGroup>
+              {buttons}
+            </FormGroup>
+          </ListGroupItem>
+        </ListGroup>
+      )
+    }
+    return null;
   }
 }
 
 const mapStateToProps = (state) => {
+  console.log(state);
   return {
     checked: state.checkboxData
   }

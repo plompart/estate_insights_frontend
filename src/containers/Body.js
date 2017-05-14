@@ -56,10 +56,10 @@ class Body extends Component {
               </Row>
               <Row className="show-grid">
                 <Col xs={6} md={4} xsOffset={3} mdOffset={2}>
-                  <BarGraph type="prices"/>
+                  <BarGraph type="hist_price_per_sqm"/>
                 </Col>
                 <Col xs={6} md={4}>
-                  <BarGraph type="surfaces"/>
+                  <BarGraph type="hist_area"/>
                 </Col>
               </Row>
             </Grid>
