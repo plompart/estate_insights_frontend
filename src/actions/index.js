@@ -9,8 +9,8 @@ export const submitData = () => {
     `area=${store.getState().form.inputForm.area}&` +
     `floor=${store.getState().form.inputForm.floor}&` +
     `rooms=${store.getState().form.inputForm.roomNumber}&` +
-    `lat=${store.getState().coordinates.lat}&` +
-    `lon=${store.getState().coordinates.lng}`
+    `latitude=${store.getState().coordinates.lat}&` +
+    `longitude=${store.getState().coordinates.lng}`
   );
   return {
     type: 'SUBMIT_DATA',
@@ -39,7 +39,7 @@ export const submitCoordinates = () => {
 
 export const submitHistData = (type) => {
   let request = axios.get(`http://localhost:5000/` +
-    `${type}` + '?nb_bins=5&'
+    `${type}` + '?nb_bins=5'
     );
 
   return {

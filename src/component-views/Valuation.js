@@ -4,12 +4,22 @@ import {connect} from 'react-redux'
 
 class Valuation extends Component {
   render() {
+    let pricePerMeter = function() {
+      if(isNaN(this.props.price_per_sqm)){
+        return;
+      }else{
+        return (
+          <ListGroupItem>Wartość m2: {this.props.price_per_sqm ? Number(this.props.price_per_sqm).toFixed(2) + " zł": <span>Ładuję</span>}</ListGroupItem>
+        )
+      }
+    };
+
     return (
       <div className="Valuation">
         <ListGroup>
           <ListGroupItem active>Twoja wycena:</ListGroupItem>
           <ListGroupItem>Wartość mieszkania: {this.props.price ? Number(this.props.price).toFixed(2) + " zł" : <span>Ładuję</span>}</ListGroupItem>
-          <ListGroupItem>Wartość m2: {this.props.price_per_sqm ? Number(this.props.price_per_sqm).toFixed(2) + " zł": <span>Ładuję</span>}</ListGroupItem>
+          {pricePerMeter}
           <ListGroupItem>Wartość m2 w okolicy: {this.props.mean_price_per_sqm ? Number(this.props.mean_price_per_sqm).toFixed(2) + " zł" : <span>Ładuję</span>}</ListGroupItem>
         </ListGroup>
       </div>

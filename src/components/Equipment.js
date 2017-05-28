@@ -17,12 +17,12 @@ class Equipment extends Component {
     let buttons = Object.values(equipment).map((menu) => {
       if (this.props.checked[menu]) {
         return (
-          <Checkbox key={menu} inline checked
+          <Checkbox key={menu} inline checked disabled
                     onChange={(event) => this.props.onChange(menu, event.target.checked)}>{menu}</Checkbox>
         );
       } else {
         return (
-          <Checkbox key={menu} inline
+          <Checkbox key={menu} inline disabled
                     onChange={(event) => this.props.onChange(menu, event.target.checked)}>{menu}</Checkbox>
         );
       }
