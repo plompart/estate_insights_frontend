@@ -24,15 +24,16 @@ class BarGraph extends Component {
 
     let labels = [];
     if(this.props.type === 'hist_price_per_sqm'){
-      labels.push( "< " + keys[0] + " tys/m2");
-      for(let i = 1; i < keys.length; i++){
-        labels.push(keys[i-1] + "-" + keys[i] + " tys/m2");
+
+      for(let i = 0; i < keys.length - 1; i++){
+        labels.push(keys[i] + "-" + keys[i+1] + " tys/m2");
       }
+      labels.push( "> " + keys[keys.length - 1] + " tys/m2");
     }else{
-      labels.push( "< " + keys[0] + " m2");
-      for(let i = 1; i < keys.length; i++){
-        labels.push(keys[i-1] + "-" + keys[i] + " m2");
+      for(let i = 0; i < keys.length - 1; i++){
+        labels.push(keys[i] + "-" + keys[i+1] + " m2");
       }
+      labels.push( "> " + keys[keys.length - 1] + " m2");
     }
 
     return {
@@ -59,7 +60,9 @@ class BarGraph extends Component {
       <div className="BarGraph">
         <ListGroup>
           <ListGroupItem active>{title}</ListGroupItem>
-          <ListGroupItem><Bar data={data}/></ListGroupItem>
+          <ListGroupItem><Bar height={450} options={{
+            maintainAspectRatio: false
+          }} data={data}/></ListGroupItem>
         </ListGroup>
       </div>
     )

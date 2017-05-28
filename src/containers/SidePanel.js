@@ -73,7 +73,6 @@ class SidePanel extends Component {
           pageWrapId={'page-wrap'}
           outerContainerId={'outer-container'}
         >
-          {console.log(Menu)}
           <Form
             model="form.inputForm"
             onSubmit={() => {

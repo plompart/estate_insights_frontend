@@ -39,7 +39,7 @@ export const submitCoordinates = () => {
 
 export const submitHistData = (type) => {
   let request = axios.get(`http://localhost:5000/` +
-    `${type}` + '?nb_bins=5'
+    `${type}` + '?nb_bins=6'
     );
 
   return {
