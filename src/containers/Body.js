@@ -13,6 +13,7 @@ import BarGraph from "../component-views/BarGraph";
 import SidePanel from "./SidePanel";
 import MainInfoView from "../component-views/MainInfoView";
 import AvgPriceForDistrictMap from "../component-views/AvgPriceForDistrictMap";
+import AllOffersMap from "../component-views/AllOffersMap";
 
 class Body extends Component {
   render() {
@@ -66,6 +67,11 @@ class Body extends Component {
               <Row className="show-grid">
                 <Col xs={12} md={8} xsOffset={3} mdOffset={2}>
                   <AvgPriceForDistrictMap lat={50.060491} lng={19.9235729}/>
+                </Col>
+              </Row>
+              <Row className="show-grid">
+                <Col xs={12} md={8} xsOffset={3} mdOffset={2}>
+                  <AllOffersMap lat={50.060491} lng={19.9235729}/>
                 </Col>
               </Row>
             </Grid>
