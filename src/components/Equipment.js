@@ -7,8 +7,8 @@ import {Checkbox, FormGroup, ListGroup, ListGroupItem} from "react-bootstrap";
 import {connect} from "react-redux";
 import {changeCheckboxData} from "../actions/index";
 
-let equipment = ['telewizja kablowa', 'internet', 'telefon', 'balkon ', 'winda',
-  'garaż', 'pom. użytkowe', 'monitoring', 'meble ', 'teren zamknięty', 'lodówka ',
+let equipment = ['telewizja kablowa', 'internet', 'telefon', 'balkon', 'winda',
+  'garaż', 'pom. użytkowe', 'monitoring', 'meble ', 'teren zamknięty', 'lodówka',
   'piekarnik', 'kuchenka', 'pralka', 'piwnica', 'drzwi / okna antywłamaniowe',
   'system alarmowy', 'prysznic', 'wanna', 'stół', 'krzesła'];
 

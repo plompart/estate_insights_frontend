@@ -20,12 +20,18 @@ const inputForm = {
   buildingType: 'blok',
 };
 
+const bubbleGraph = {
+  x: 'area',
+  y: 'price',
+};
+
 const reducer = combineReducers({
   coordinates,
   valuation,
   checkboxData,
   form: combineForms({
-      inputForm
+    inputForm,
+    bubbleGraph,
   },'form'),
 });
 

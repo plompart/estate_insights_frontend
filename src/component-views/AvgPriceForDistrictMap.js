@@ -12,49 +12,153 @@ import {ListGroup, ListGroupItem} from "react-bootstrap";
 const SimpleMapExampleGoogleMap = withGoogleMap(props => {
   let circleAreas = [
     {
-      districtName: "Stare Miasto",
+    districtName: "Stare Miasto I",
       position: {
-        lat: 50.062659,
-        lng: 19.906899
+        lat: 50.061506,
+        lng: 19.937884
       },
-      avgPrice: 210000,
+      avgPrice: 1000,
       radius: 1000,
     },
     {
-      districtName: "Bronowice",
+      districtName: "Grzegórzki II",
       position: {
-        lat: 50.0830503,
-        lng: 19.8370422
+        lat: 50.062081,
+        lng: 19.968075
       },
-      avgPrice: 210000,
+      avgPrice: 1000,
       radius: 1200,
     },
     {
-      districtName: "Grzegórzki",
+      districtName: "Pradnik Czerwony III",
       position: {
-        lat: 50.0646066,
-        lng: 19.9529138
+        lat: 50.086976,
+        lng: 19.968243
       },
-      avgPrice: 240000,
+      avgPrice: 1000,
       radius: 1200,
     },
     {
-      districtName: "Kazimierz",
+      districtName: "Pradnik Biały IV",
       position: {
-        lat: 50.0515918,
-        lng: 19.9357531
+        lat: 50.106925,
+        lng: 19.917033
       },
-      avgPrice: 270000,
-      radius: 1000,
+      avgPrice: 1000,
+      radius: 2000,
     },
     {
-      districtName: "Prądnik Biały",
+      districtName: "Bronowice VI",
       position: {
-        lat: 50.1023721,
-        lng: 19.8891376
+        lat: 50.082669,
+        lng: 19.862920
       },
-      avgPrice: 230000,
+      avgPrice: 1000,
+      radius: 1800,
+    },{
+      districtName: "Dębniki VII",
+      position: {
+        lat: 50.015957,
+        lng: 19.874714
+      },
+      avgPrice: 1000,
+      radius: 3000,
+    },{
+      districtName: "Zwierzyniec",
+      position: {
+        lat: 50.056583,
+        lng: 19.854543
+      },
+      avgPrice: 1000,
+      radius: 2200,
+    },{
+      districtName: "Łagiewniki - Borek Fałęcki",
+      position: {
+        lat: 50.017779,
+        lng: 19.929685
+      },
+      avgPrice: 1000,
+      radius: 1600,
+    },{
+      districtName: "Swoszowice",
+      position: {
+        lat: 49.988400,
+        lng: 19.953777
+      },
+      avgPrice: 1000,
       radius: 1700,
+    },{
+      districtName: "Podgórze Duchackie",
+      position: {
+        lat: 50.013819,
+        lng: 19.964842
+      },
+      avgPrice: 1000,
+      radius: 1700,
+    },{
+      districtName: "Bieżanów - Prokocim",
+      position: {
+        lat: 50.018092,
+        lng: 20.027471
+      },
+      avgPrice: 1000,
+      radius: 2300,
+    },{
+      districtName: "Podgórze",
+      position: {
+        lat: 50.039351,
+        lng: 19.978552
+      },
+      avgPrice: 1000,
+      radius: 1700,
+    },{
+      districtName: "Czyżyny",
+      position: {
+        lat: 50.067815,
+        lng: 20.010506
+      },
+      avgPrice: 1000,
+      radius: 1900,
+    },{
+      districtName: "Mistrzejowice",
+      position: {
+        lat: 50.099978,
+        lng: 20.007730
+      },
+      avgPrice: 1000,
+      radius: 1700,
+    },{
+      districtName: "Bieńczyce",
+      position: {
+        lat: 50.086961,
+        lng: 20.023791
+      },
+      avgPrice: 1000,
+      radius: 800,
+    },{
+      districtName: "Wzgórza Krzesławickie",
+      position: {
+        lat: 50.100015,
+        lng: 20.074530
+      },
+      avgPrice: 1000,
+      radius: 2300,
+    },{
+      districtName: "Nowa Huta",
+      position: {
+        lat: 50.065119,
+        lng: 20.128466
+      },
+      avgPrice: 1000,
+      radius: 3400,
+    },{
+      districtName: "Krowodrza V",
+      position: {
+        lat: 50.071567,
+        lng: 19.916865
+      },
+      avgPrice: 1000,
+      radius: 1200,
     },
   ];
 
@@ -93,6 +197,13 @@ const SimpleMapExampleGoogleMap = withGoogleMap(props => {
           }
           return (
           <Circle
+            onClick={() => {
+              return(
+                <InfoWindow position={district.position}>
+                  <div>TETSTTSTE</div>
+                </InfoWindow>
+              )
+            }}
           center={district.position}
           radius={district.radius}
           options={options}

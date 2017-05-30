@@ -3,7 +3,7 @@
  */
 
 import React, {Component} from 'react';
-import {Button, Col, Grid, PageHeader, Row} from "react-bootstrap";
+import {Col, Grid, PageHeader, Row} from "react-bootstrap";
 import MyHeader from "../components/MyHeader";
 import ReactDOM from "react-dom";
 import Body from "./Body";

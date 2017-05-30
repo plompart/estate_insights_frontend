@@ -4,7 +4,8 @@
 
 import React, {Component} from 'react';
 import {Bubble} from 'react-chartjs-2';
-import {ControlLabel, FormControl, ListGroup, ListGroupItem} from "react-bootstrap";
+import {Button, ControlLabel, ListGroup, ListGroupItem} from "react-bootstrap";
+import {Field, Form} from "react-redux-form";
 
 let points = [];
 
@@ -12,6 +13,7 @@ for(let i = 0; i < 1000; i++){
   let point = {};
   point.x = i%5;
   point.y = Math.random()*40 + 1;
+  point.r = 1;
   points.push(point);
 }
 
@@ -49,18 +51,27 @@ class BubbleGraph extends Component {
           <ListGroupItem active/>
           <ListGroupItem>
             <ControlLabel>Oś x:</ControlLabel>
-            <FormControl componentClass="select" placeholder="Oś x">
-              <option value="area">powierzchnia</option>
-              <option value="floors">liczba pokoi</option>
-            </FormControl>
+            <Form model="form.bubbleGraph">
+              <Field model="form.bubbleGraph.x">
+                <select >
+                  <option value="area">powierzchnia</option>
+                  <option value="floors">liczba pokoi</option>
+                </select>
+              </Field>
+            </Form>
           </ListGroupItem>
           <ListGroupItem>
             <ControlLabel>Oś y:</ControlLabel>
-            <FormControl componentClass="select" placeholder="oś y">
-              <option value="price">cena</option>
-              <option value="distFromCentrum">odległość od centrum</option>
-            </FormControl>
+            <Form model="form.bubbleGraph">
+              <Field model="form.bubbleGraph.y">
+                <select >
+                  <option value="price">cena</option>
+                  <option value="distFromCentrum">odległość od centrum</option>
+                </select>
+              </Field>
+            </Form>
           </ListGroupItem>
+          <ListGroupItem><Button>Wyślij</Button></ListGroupItem>
           <ListGroupItem><Bubble data={data} /></ListGroupItem>
         </ListGroup>
       </div>
