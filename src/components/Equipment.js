@@ -5,24 +5,24 @@
 import React, {Component} from "react";
 import {Checkbox, FormGroup, ListGroup, ListGroupItem} from "react-bootstrap";
 import {connect} from "react-redux";
-import {changeCheckboxData} from "../actions/index";
-
-let equipment = ['telewizja kablowa', 'internet', 'telefon', 'balkon', 'winda',
-  'garaż', 'pom. użytkowe', 'monitoring', 'meble ', 'teren zamknięty', 'lodówka',
-  'piekarnik', 'kuchenka', 'pralka', 'piwnica', 'drzwi / okna antywłamaniowe',
-  'system alarmowy', 'prysznic', 'wanna', 'stół', 'krzesła'];
+import {changeCheckboxData, getEquipmentNames} from "../actions/index";
 
 class Equipment extends Component {
+  constructor(props){
+    super(props);
+    this.props.getEquipmentNames();
+  }
+
   render() {
-    let buttons = Object.values(equipment).map((menu) => {
+    let buttons = Object.values(this.props.equipmentNames).map((menu) => {
       if (this.props.checked[menu]) {
         return (
-          <Checkbox key={menu} inline checked disabled
+          <Checkbox key={menu} inline checked
                     onChange={(event) => this.props.onChange(menu, event.target.checked)}>{menu}</Checkbox>
         );
       } else {
         return (
-          <Checkbox key={menu} inline disabled
+          <Checkbox key={menu} inline
                     onChange={(event) => this.props.onChange(menu, event.target.checked)}>{menu}</Checkbox>
         );
       }
@@ -42,15 +42,15 @@ class Equipment extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onChange: (prop, value) => {
-      dispatch(changeCheckboxData(prop, value));
-    }
+    onChange: (prop, value) => dispatch(changeCheckboxData(prop, value)),
+    getEquipmentNames: () => dispatch(getEquipmentNames()),
   }
 };
 
 const mapStateToProps = (state) => {
   return {
-    checked: state.checkboxData
+    checked: state.checkboxData.checked,
+    equipmentNames: state.checkboxData.equipmentNames,
   }
 };
 

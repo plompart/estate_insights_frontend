@@ -195,26 +195,14 @@ const SimpleMapExampleGoogleMap = withGoogleMap(props => {
               strokeWeight: 1,
             }
           }
-          return (
-          <Circle
-            onClick={() => {
-              return(
-                <InfoWindow position={district.position}>
-                  <div>TETSTTSTE</div>
-                </InfoWindow>
-              )
-            }}
-          center={district.position}
-          radius={district.radius}
-          options={options}
-          />
-          )
+          return <Circle key={district.districtName} center={district.position} radius={district.radius} options={options}/>
+
         })
       }
       {
         circleAreas.map(district => {
           return (
-            <InfoWindow position={district.position}>
+            <InfoWindow key={district.districtName} position={district.position}>
               <div>{district.districtName} : {district.avgPrice} zł</div>
             </InfoWindow>
           )

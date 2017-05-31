@@ -22,7 +22,7 @@ class MainInfoView extends Component {
 
       if(obj[key] !== "" && key !== "dispatch"){
         return(
-          <ListGroupItem>{name}{obj[key]}{last}</ListGroupItem>
+          <ListGroupItem key={key}>{name}{obj[key]}{last}</ListGroupItem>
         )
       }else{
         return null;

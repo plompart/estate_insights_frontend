@@ -18,6 +18,14 @@ export const submitData = () => {
   }
 };
 
+export const getEquipmentNames = () => {
+  let request = axios.get(`http://localhost:5000/additional_features?`);
+  return {
+    type: 'GET_EQUIPMENT_NAMES',
+    payload: request
+  }
+};
+
 export const changeCheckboxData = (prop, value) => {
   return {
     type: 'CHANGE_CHECKBOX_DATA',
@@ -38,9 +46,7 @@ export const submitCoordinates = () => {
 };
 
 export const submitHistData = (type) => {
-  let request = axios.get(`http://localhost:5000/` +
-    `${type}` + '?nb_bins=6'
-    );
+  let request = axios.get(`http://localhost:5000/${type}?nb_bins=6`);
 
   return {
     type: type,

@@ -6,14 +6,8 @@ import React, {Component} from 'react';
 import {ListGroup, ListGroupItem} from "react-bootstrap";
 import {Errors, Control} from "react-redux-form";
 import {isCracow, isString, isNumber, required} from "../rules/index";
-import {connect} from "react-redux";
 
 class Location extends Component {
-  constructor(props){
-    super(props);
-    this.props = {onBlur: {}, props};
-  }
-
   render() {
     return (
       <ListGroup>
@@ -22,7 +16,6 @@ class Location extends Component {
           <div className="field">
             <Control.text
               placeholder="miasto"
-              onBlur={(event) => this.props.onBlur("city", event.target.value)}
               model="form.inputForm.city"
               validators={{
                 required,
@@ -44,7 +37,6 @@ class Location extends Component {
           <div className="field">
             <Control.text
               placeholder="ulica"
-              onBlur={(event) => this.props.onBlur("road", event.target.value)}
               model="form.inputForm.road"
               validators={{
                 required,
@@ -64,7 +56,6 @@ class Location extends Component {
           <div className="field">
             <Control.text
               placeholder="numer mieszkania"
-              onBlur={(event) => this.props.onBlur("houseNumber", event.target.value)}
               model="form.inputForm.houseNumber"
               type="number"
               validators={{
@@ -88,12 +79,4 @@ class Location extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onBlur: (prop, value) => {
-      //dispatch(changeInputData(prop, value));
-    }
-  }
-}
-
-export default connect(null, mapDispatchToProps)(Location);
+export default Location;
