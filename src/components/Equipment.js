@@ -8,11 +8,6 @@ import {connect} from "react-redux";
 import {changeCheckboxData, getEquipmentNames} from "../actions/index";
 
 class Equipment extends Component {
-  constructor(props){
-    super(props);
-    this.props.getEquipmentNames();
-  }
-
   render() {
     let buttons = Object.values(this.props.equipmentNames).map((menu) => {
       if (this.props.checked[menu]) {
@@ -43,14 +38,14 @@ class Equipment extends Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     onChange: (prop, value) => dispatch(changeCheckboxData(prop, value)),
-    getEquipmentNames: () => dispatch(getEquipmentNames()),
   }
 };
 
 const mapStateToProps = (state) => {
+  console.log(state);
   return {
-    checked: state.checkboxData.checked,
-    equipmentNames: state.checkboxData.equipmentNames,
+    checked: state.serverData.checked,
+    equipmentNames: state.serverData.equipmentNames,
   }
 };
 

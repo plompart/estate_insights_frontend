@@ -34,8 +34,8 @@ class EquipmentView extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    checked: state.checkboxData.checked,
-    equipmentNames: state.checkboxData.equipmentNames,
+    checked: state.serverData.checked,
+    equipmentNames: state.serverData.equipmentNames,
   }
 };
 

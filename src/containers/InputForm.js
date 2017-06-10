@@ -11,16 +11,15 @@ import {Provider, connect} from "react-redux";
 import Location from "../components/Location";
 import MainInfo from "../components/MainInfo";
 import Equipment from "../components/Equipment";
-import {submitCoordinates, submitData, submitHistData} from "../actions/index"
+import {getAdditionalFeatures, getEquipmentNames, submitCoordinates, submitData, submitHistData} from "../actions/index"
 import {Form} from "react-redux-form";
+import AdditionalInfo from "../components/AdditionalInfo";
 
 class InputForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      buildingType: "blok",
-
-    };
+    this.props.getAdditionalFeatures();
+    this.props.getEquipmentNames();
   }
 
   render() {
@@ -57,6 +56,11 @@ class InputForm extends Component {
             </Row>
             <Row className="show-grid">
               <Col xs={12} md={8} xsOffset={3} mdOffset={2}>
+                <AdditionalInfo/>
+              </Col>
+            </Row>
+            <Row className="show-grid">
+              <Col xs={12} md={8} xsOffset={3} mdOffset={2}>
                 <Equipment/>
               </Col>
             </Row>
@@ -80,7 +84,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     submitData: () => dispatch(submitData()),
     submitCoordinates: () => dispatch(submitCoordinates()),
-    submitHistData: (type) => dispatch(submitHistData(type))
+    submitHistData: (type) => dispatch(submitHistData(type)),
+    getAdditionalFeatures: () => dispatch(getAdditionalFeatures()),
+    getEquipmentNames: () => dispatch(getEquipmentNames()),
   }
 };
 

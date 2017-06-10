@@ -4,7 +4,7 @@
 
 import React, {Component} from 'react';
 import {ListGroup, ListGroupItem} from "react-bootstrap";
-import {Errors, Control, Field} from "react-redux-form";
+import {Errors, Control} from "react-redux-form";
 import {isRoomCorrect, isFloorCorrect, isNumber} from "../rules/index";
 
 class MainInfo extends Component {
@@ -74,13 +74,27 @@ class MainInfo extends Component {
               }}
             />
           </div>
-          <Field model="form.inputForm.buildingType">
-            <select >
-              <option value="blok">blok</option>
-              <option value="kamienica">kamienica</option>
-              <option value="apartamentowiec">apartamentowiec</option>
-            </select>
-          </Field>
+          <div className="field">
+            <Control.text
+              placeholder="numer najwyższego piętra"
+              model=".number_of_floors"
+              validators={{
+                //required,
+                isNumber,
+                isFloorCorrect,
+              }}
+            />
+            <Errors
+              className="errors"
+              model="form.inputForm.number_of_floors"
+              show="touched"
+              messages={{
+                //required: 'Pole wymagane',
+                isNumber: "Musi być liczbą",
+                isFloorCorrect: 'Zły numer piętra',
+              }}
+            />
+          </div>
         </ListGroupItem>
       </ListGroup>
     )

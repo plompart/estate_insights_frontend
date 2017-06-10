@@ -5,7 +5,7 @@
 import {createStore, applyMiddleware, combineReducers} from 'redux'
 
 import valuation from './valuation'
-import checkboxData from './checkboxData'
+import serverData from './serverData'
 import ReduxPromise from 'redux-promise'
 import {combineForms} from "react-redux-form";
 import coordinates from "./coordinates";
@@ -17,7 +17,12 @@ const inputForm = {
   area: '',
   roomNumber: '',
   floor: '',
-  buildingType: 'blok',
+  buildingType: '',
+  development_state: '',
+  heating: '',
+  market: '',
+  material: '',
+  heating_material: '',
 };
 
 const bubbleGraph = {
@@ -28,7 +33,7 @@ const bubbleGraph = {
 const reducer = combineReducers({
   coordinates,
   valuation,
-  checkboxData,
+  serverData,
   form: combineForms({
     inputForm,
     bubbleGraph,

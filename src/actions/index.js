@@ -53,3 +53,23 @@ export const submitHistData = (type) => {
     payload: request
   }
 };
+
+export const getAdditionalFeatures = () => {
+  let request = axios.get(`http://localhost:5000/pickable_features`);
+
+  let mock = {
+    data: {
+      "development_state": ["do remontu", "do wyko\u0144czenia", "do zamieszkania"],
+      "heating": ["elektryczne", "gazowe", "kot\u0142ownia", "miejskie", "piece kaflowe"],
+      "market": ["pierwotny", "wt\u00f3rny"],
+      "material": ["beton", "beton kom\u00f3rkowy", "ceg\u0142a", "drewno", "keramzyt", "pustak", "silikat", "wielka p\u0142yta", "\u017celbet"],
+      "type": ["apartamentowiec", "blok", "dom wolnostoj\u0105cy", "kamienica", "loft", "plomba", "szeregowiec"],
+      "windows_material": ["aluminiowe", "drewniane", "plastikowe"]
+    }
+  };
+
+  return {
+    type: 'ADDITIONAL_INFO',
+    payload: mock
+  }
+};
