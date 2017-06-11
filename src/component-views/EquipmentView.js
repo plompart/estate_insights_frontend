@@ -7,6 +7,13 @@ import {Checkbox, FormGroup, ListGroup, ListGroupItem} from "react-bootstrap";
 import {connect} from "react-redux";
 
 class EquipmentView extends Component {
+  ifContainsFalse(data){
+    if(Object.values(data).indexOf(true) === -1){
+      return true;
+    }
+    return false;
+  }
+
   render() {
     let buttons = Object.values(this.props.equipmentNames).map((menu) => {
       if (this.props.checked[menu]) {
@@ -16,7 +23,7 @@ class EquipmentView extends Component {
       }
       return null;
     });
-    if (Object.keys(this.props.checked).length !== 0) {
+    if (!this.ifContainsFalse(this.props.checked)) {
       return (
         <ListGroup>
           <ListGroupItem active>Wyposażenie</ListGroupItem>

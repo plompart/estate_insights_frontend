@@ -23,7 +23,7 @@ const inputForm = {
   heating: '',
   market: '',
   material: '',
-  heating_material: '',
+  windows_material: '',
   build_year: '',
 };
 

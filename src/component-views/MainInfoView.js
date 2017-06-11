@@ -7,43 +7,59 @@ import {ListGroup, ListGroupItem} from "react-bootstrap";
 import {connect} from "react-redux";
 
 class MainInfoView extends Component {
-  isDefaultProps(){
-    for(let val of this.data){
-      if(val !== null){
-        return true;
-      }
+  constructor(props){
+    super(props);
+    this.state = {
+      default: true,
+      data: [null],
     }
-    return false;
   }
 
+  setGroupItems(props) {
+    let data = Object.keys(props).map((key) => {
+      let name = "";
+      let last = "";
+      if (key === "area") {
+        name = "Powierzchnia: ";
+        last = " m2";
+      }
+      if (key === "floor") name = "Piętro: ";
+      if (key === "number_of_floors") name = "Najwyższe piętro: ";
+      if (key === "roomNumber") name = "Liczba pokoi: ";
+      if (key === "build_year") name = "Rok budowy: ";
 
-  data = Object.keys(this.props).map((key) => {
-    let name = "";
-    let last = "";
-    if(key === "area"){
-      name = "Powierzchnia: ";
-      last = " m2";
-    }
-    if(key === "floor")name = "Piętro: ";
-    if(key === "number_of_floors")name = "Najwyższe piętro: ";
-    if(key === "roomNumber")name = "Liczba pokoi: ";
-    if(key === "build_year")name = "Rok budowy: ";
+      if (props[key] !== "" && key !== "dispatch") {
+        return (
+          <ListGroupItem key={key}>{name}{props[key]}{last}</ListGroupItem>
+        )
+      } else {
+        return null;
+      }
+    });
 
-    if(this.props[key] !== "" && key !== "dispatch"){
-      return(
-        <ListGroupItem key={key}>{name}{this.props[key]}{last}</ListGroupItem>
-      )
-    }else{
-      return null;
+    for(let val of data){
+      if(val !== null){
+        this.setState({default: false, data: data});
+        return;
+      }
     }
-  });
+    this.setState({default: true, data: []});
+  }
+
+  componentWillMount(){
+    this.setGroupItems(this.props);
+  }
+
+  componentWillReceiveProps(newProps){
+    this.setGroupItems(newProps);
+  }
 
   render() {
-    if(this.isDefaultProps()){
+    if(!this.state.default){
       return(
         <ListGroup>
           <ListGroupItem active>Informacje główne:</ListGroupItem>
-          {this.data}
+          {this.state.data}
         </ListGroup>
       )
     }

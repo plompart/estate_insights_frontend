@@ -15,6 +15,7 @@ import MainInfoView from "../component-views/MainInfoView";
 import AvgPriceForDistrictMap from "../component-views/AvgPriceForDistrictMap";
 import AllOffersMap from "../component-views/AllOffersMap";
 import BubbleGraph from "../component-views/BubbleGraph";
+import AdditionalInfoView from "../component-views/AdditionalInfoView";
 
 class Body extends Component {
   render() {
@@ -50,6 +51,11 @@ class Body extends Component {
               <Row className="show-grid">
                 <Col xs={12} md={8} xsOffset={3} mdOffset={2}>
                   <MainInfoView/>
+                </Col>
+              </Row>
+              <Row className="show-grid">
+                <Col xs={12} md={8} xsOffset={3} mdOffset={2}>
+                  <AdditionalInfoView/>
                 </Col>
               </Row>
               <Row className="show-grid">

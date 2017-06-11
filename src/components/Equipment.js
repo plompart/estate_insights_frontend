@@ -42,7 +42,6 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     checked: state.serverData.checked,
     equipmentNames: state.serverData.equipmentNames,

@@ -10,6 +10,7 @@ import Equipment from "../components/Equipment";
 import {submitCoordinates, submitData} from "../actions/index"
 import {connect} from "react-redux";
 import {Form} from "react-redux-form";
+import AdditionalInfo from "../components/AdditionalInfo";
 
 var MenuWrap = React.createClass({
 
@@ -82,6 +83,7 @@ class SidePanel extends Component {
           >
             <Location/>
             <MainInfo/>
+            <AdditionalInfo/>
             <Equipment/>
             <button type="submit" className="btn btn-default">
               Wyceń
