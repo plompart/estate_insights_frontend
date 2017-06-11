@@ -12,6 +12,7 @@ let initialState = {
   type: [],
   windows_material: [],
   bubbleGraphData: [],
+  allOffers: [],
 };
 
 const serverData = (state = initialState, action) => {
@@ -43,6 +44,11 @@ const serverData = (state = initialState, action) => {
       return {
         ...state,
         bubbleGraphData: action.payload.data,
+      };
+    case 'ALL_OFFERS':
+      return {
+        ...state,
+        allOffers: action.payload.data,
       };
     default:
       return state

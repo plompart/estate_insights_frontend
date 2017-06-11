@@ -9,6 +9,8 @@ import {
 } from "react-google-maps";
 import {ListGroup, ListGroupItem} from "react-bootstrap";
 import { default as MarkerClusterer } from "react-google-maps/lib/addons/MarkerClusterer";
+import {connect} from "react-redux";
+import {getAllOffers} from "../actions/index";
 
 const SimpleMapExampleGoogleMap = withGoogleMap(props => {
   let markers = [];
@@ -30,10 +32,9 @@ const SimpleMapExampleGoogleMap = withGoogleMap(props => {
         enableRetinaIcons
         gridSize={60}
       >
-        {markers.map(marker => (
+        {props.markers.map(marker => (
           <Marker
-            position={marker.position}
-            key={marker.id}
+            position={{lat: marker.latitude, lng: marker.longitude}}
           />
         ))}
       </MarkerClusterer>
@@ -42,6 +43,10 @@ const SimpleMapExampleGoogleMap = withGoogleMap(props => {
 });
 
 class AllOffersMap extends Component {
+  constructor(props){
+    super(props);
+    this.props.getAllOffers();
+  }
   render() {
     return (
       <ListGroup>
@@ -55,6 +60,7 @@ class AllOffersMap extends Component {
           padding: 0
         }}>
           <SimpleMapExampleGoogleMap
+            markers={this.props.markers}
             lat={this.props.lat}
             lng={this.props.lng}
             containerElement={
@@ -75,4 +81,16 @@ class AllOffersMap extends Component {
   }
 }
 
-export default AllOffersMap;
+const mapStateToProps = (state) => {
+  return {
+    markers: state.serverData.allOffers,
+  }
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    getAllOffers: () => dispatch(getAllOffers())
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AllOffersMap);

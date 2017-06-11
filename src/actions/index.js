@@ -89,3 +89,12 @@ export const getBubbleGraphData = () => {
     payload: request
   }
 };
+
+export const getAllOffers = () => {
+  let request = axios.get(`http://rossum.knbit.edu.pl:32005/all_offers`);
+
+  return {
+    type: 'ALL_OFFERS',
+    payload: request
+  }
+};
