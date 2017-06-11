@@ -12,8 +12,8 @@ export const submitData = () => {
   //   `latitude=${store.getState().coordinates.lat}&` +
   //   `longitude=${store.getState().coordinates.lng}`
   // );
-
-  let request = axios.post('http://rossum.knbit.edu.pl:32005/predict?',{
+//http://rossum.knbit.edu.pl:32005
+  let request = axios.post('http://localhost:5000/predict?',{
     acreage: Number(store.getState().form.inputForm.area),
     all_floors: Number(store.getState().form.inputForm.number_of_floors),
     // build_year: store.getState().form.inputForm.build_year,
@@ -36,7 +36,7 @@ export const submitData = () => {
 };
 
 export const getEquipmentNames = () => {
-  let request = axios.get(`http://rossum.knbit.edu.pl:32005/additional_features`);
+  let request = axios.get(`http://localhost:5000/additional_features`);
   return {
     type: 'GET_EQUIPMENT_NAMES',
     payload: request
@@ -63,7 +63,7 @@ export const submitCoordinates = () => {
 };
 
 export const submitHistData = (type) => {
-  let request = axios.get(`http://rossum.knbit.edu.pl:32005/${type}?nb_bins=6`);
+  let request = axios.get(`http://localhost:5000/${type}?nb_bins=6`);
 
   return {
     type: type,
@@ -72,21 +72,20 @@ export const submitHistData = (type) => {
 };
 
 export const getAdditionalFeatures = () => {
-  let request = axios.get(`http://rossum.knbit.edu.pl:32005/pickable_features`);
-
-  let mock = {
-    data: {
-      "development_state": ["do remontu", "do wyko\u0144czenia", "do zamieszkania"],
-      "heating": ["elektryczne", "gazowe", "kot\u0142ownia", "miejskie", "piece kaflowe"],
-      "market": ["pierwotny", "wt\u00f3rny"],
-      "material": ["beton", "beton kom\u00f3rkowy", "ceg\u0142a", "drewno", "keramzyt", "pustak", "silikat", "wielka p\u0142yta", "\u017celbet"],
-      "type": ["apartamentowiec", "blok", "dom wolnostoj\u0105cy", "kamienica", "loft", "plomba", "szeregowiec"],
-      "windows_material": ["aluminiowe", "drewniane", "plastikowe"]
-    }
-  };
+  let request = axios.get(`http://localhost:5000/pickable_features`);
 
   return {
     type: 'ADDITIONAL_INFO',
+    payload: request
+  }
+};
+
+export const getBubbleGraphData = () => {
+  let request = axios.get(`http://localhost:5000/scatter?` +
+  `x=${store.getState().form.bubbleGraph.x}&y=${store.getState().form.bubbleGraph.y}&r=1&n=1000`);
+
+  return {
+    type: 'BUBBLE_GRAPH_DATA',
     payload: request
   }
 };
