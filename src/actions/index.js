@@ -13,7 +13,7 @@ export const submitData = () => {
   //   `longitude=${store.getState().coordinates.lng}`
   // );
 //http://rossum.knbit.edu.pl:32005
-  let request = axios.post('http://localhost:5000/predict?',{
+  let request = axios.post('http://rossum.knbit.edu.pl:32005/predict?',{
     acreage: Number(store.getState().form.inputForm.area),
     all_floors: Number(store.getState().form.inputForm.number_of_floors),
     // build_year: store.getState().form.inputForm.build_year,
@@ -36,7 +36,7 @@ export const submitData = () => {
 };
 
 export const getEquipmentNames = () => {
-  let request = axios.get(`http://localhost:5000/additional_features`);
+  let request = axios.get(`http://rossum.knbit.edu.pl:32005/additional_features`);
   return {
     type: 'GET_EQUIPMENT_NAMES',
     payload: request
@@ -63,7 +63,7 @@ export const submitCoordinates = () => {
 };
 
 export const submitHistData = (type) => {
-  let request = axios.get(`http://localhost:5000/${type}?nb_bins=6`);
+  let request = axios.get(`http://rossum.knbit.edu.pl:32005/${type}?nb_bins=6`);
 
   return {
     type: type,
@@ -72,7 +72,7 @@ export const submitHistData = (type) => {
 };
 
 export const getAdditionalFeatures = () => {
-  let request = axios.get(`http://localhost:5000/pickable_features`);
+  let request = axios.get(`http://rossum.knbit.edu.pl:32005/pickable_features`);
 
   return {
     type: 'ADDITIONAL_INFO',
@@ -81,7 +81,7 @@ export const getAdditionalFeatures = () => {
 };
 
 export const getBubbleGraphData = () => {
-  let request = axios.get(`http://localhost:5000/scatter?` +
+  let request = axios.get(`http://rossum.knbit.edu.pl:32005/scatter?` +
   `x=${store.getState().form.bubbleGraph.x}&y=${store.getState().form.bubbleGraph.y}&r=1&n=1000`);
 
   return {
