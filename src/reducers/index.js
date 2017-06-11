@@ -17,12 +17,14 @@ const inputForm = {
   area: '',
   roomNumber: '',
   floor: '',
+  number_of_floors: '',
   buildingType: '',
   development_state: '',
   heating: '',
   market: '',
   material: '',
   heating_material: '',
+  build_year: '',
 };
 
 const bubbleGraph = {

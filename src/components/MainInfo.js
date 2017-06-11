@@ -5,7 +5,10 @@
 import React, {Component} from 'react';
 import {ListGroup, ListGroupItem} from "react-bootstrap";
 import {Errors, Control} from "react-redux-form";
-import {isRoomCorrect, isFloorCorrect, isNumber} from "../rules/index";
+import {
+  isRoomCorrect, isFloorCorrect, isNumber, isYearCorrect, isMaxFloorCorrect,
+  isFloorLowerThanMax
+} from "../rules/index";
 
 class MainInfo extends Component {
   render() {
@@ -61,6 +64,7 @@ class MainInfo extends Component {
                 //required,
                 isNumber,
                 isFloorCorrect,
+                isFloorLowerThanMax,
               }}
             />
             <Errors
@@ -71,6 +75,7 @@ class MainInfo extends Component {
                 //required: 'Pole wymagane',
                 isNumber: "Musi być liczbą",
                 isFloorCorrect: 'Zły numer piętra',
+                isFloorLowerThanMax: 'Najwyższe piętro budynku mniejsze od piętra mieszkania',
               }}
             />
           </div>
@@ -82,6 +87,7 @@ class MainInfo extends Component {
                 //required,
                 isNumber,
                 isFloorCorrect,
+                isMaxFloorCorrect,
               }}
             />
             <Errors
@@ -92,6 +98,28 @@ class MainInfo extends Component {
                 //required: 'Pole wymagane',
                 isNumber: "Musi być liczbą",
                 isFloorCorrect: 'Zły numer piętra',
+                isMaxFloorCorrect: 'Najwyższe piętro budynku mniejsze od piętra mieszkania',
+              }}
+            />
+          </div>
+          <div className="field">
+            <Control.text
+              placeholder="rok budowy"
+              model=".build_year"
+              validators={{
+                //required,
+                isNumber,
+                isYearCorrect,
+              }}
+            />
+            <Errors
+              className="errors"
+              model="form.inputForm.build_year"
+              show="touched"
+              messages={{
+                //required: 'Pole wymagane',
+                isNumber: "Musi być liczbą",
+                isYearCorrect: 'Zły rok budowy',
               }}
             />
           </div>

@@ -24,6 +24,7 @@ const serverData = (state = initialState, action) => {
       return {
         ...state,
         checked: {
+          ...state.checked,
           [action.prop]: action.value
         }
       };

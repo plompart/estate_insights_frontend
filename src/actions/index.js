@@ -2,16 +2,33 @@
  * Created by Patryk on 2017-04-09.
  */
 import axios from 'axios';
-import store from '../reducers/index'
+import store from '../reducers/index';
 
 export const submitData = () => {
-  let request = axios.get(`http://localhost:5000/predict?` +
-    `area=${store.getState().form.inputForm.area}&` +
-    `floor=${store.getState().form.inputForm.floor}&` +
-    `rooms=${store.getState().form.inputForm.roomNumber}&` +
-    `latitude=${store.getState().coordinates.lat}&` +
-    `longitude=${store.getState().coordinates.lng}`
-  );
+  // let request = axios.get(`http://localhost:5000/predict?` +
+  //   `area=${store.getState().form.inputForm.area}&` +
+  //   `floor=${store.getState().form.inputForm.floor}&` +
+  //   `rooms=${store.getState().form.inputForm.roomNumber}&` +
+  //   `latitude=${store.getState().coordinates.lat}&` +
+  //   `longitude=${store.getState().coordinates.lng}`
+  // );
+
+  let request = axios.post('http://localhost:5000/predict?',{
+    acreage: Number(store.getState().form.inputForm.area),
+    all_floors: Number(store.getState().form.inputForm.number_of_floors),
+    // build_year: store.getState().form.inputForm.build_year,
+    development_state: store.getState().form.inputForm.development_state,
+    floor: Number(store.getState().form.inputForm.floor),
+    heating: store.getState().form.inputForm.heating,
+    market: store.getState().form.inputForm.market,
+    material: store.getState().form.inputForm.material,
+    rooms: Number(store.getState().form.inputForm.roomNumber),
+    windows_material: store.getState().form.inputForm.windows_material,
+    type: store.getState().form.inputForm.buildingType,
+    latitude: store.getState().coordinates.lat,
+    longitude: store.getState().coordinates.lng,
+    additional_features: store.getState().valuation.checked,
+  });
   return {
     type: 'SUBMIT_DATA',
     payload: request
@@ -70,6 +87,6 @@ export const getAdditionalFeatures = () => {
 
   return {
     type: 'ADDITIONAL_INFO',
-    payload: mock
+    payload: request
   }
 };

@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 class Valuation extends Component {
   render() {
     let pricePerMeter = function(props) {
-      if(props.price_per_sqm === "nan"){
+      if(props.price_per_sqm === "nan" || props.price_per_sqm === "inf"){
         return;
       }else{
         return (
