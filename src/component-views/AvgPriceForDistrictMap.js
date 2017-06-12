@@ -8,6 +8,8 @@ import {
   GoogleMap, InfoWindow, Circle,
 } from "react-google-maps";
 import {ListGroup, ListGroupItem} from "react-bootstrap";
+import {connect} from "react-redux";
+import {getDistrictData} from "../actions/index";
 
 const SimpleMapExampleGoogleMap = withGoogleMap(props => {
   let circleAreas = [
@@ -162,15 +164,24 @@ const SimpleMapExampleGoogleMap = withGoogleMap(props => {
     },
   ];
 
+  let maxPrice = 0;
+
+  for(let val of props.circleAreas){
+    if(val.price > maxPrice){
+      maxPrice = val.price;
+    }
+  }
+
+
   return (
     <GoogleMap
       defaultZoom={12}
       defaultCenter={{lat: props.lat, lng: props.lng}}
     >
       {
-        circleAreas.map(district => {
+        props.circleAreas.map(district => {
           let options;
-          if (district.avgPrice > 250000) {
+          if (district.price > maxPrice * 0.66) {
             options = {
               fillColor: `red`,
               fillOpacity: 0.20,
@@ -178,7 +189,7 @@ const SimpleMapExampleGoogleMap = withGoogleMap(props => {
               strokeOpacity: 1,
               strokeWeight: 1,
             }
-          }else if (district.avgPrice > 220000) {
+          }else if (district.price > maxPrice * 0.33) {
             options = {
               fillColor: `yellow`,
               fillOpacity: 0.20,
@@ -195,15 +206,15 @@ const SimpleMapExampleGoogleMap = withGoogleMap(props => {
               strokeWeight: 1,
             }
           }
-          return <Circle key={district.districtName} center={district.position} radius={district.radius} options={options}/>
+          return <Circle key={district.name} center={{lat: district.latitude, lng: district.longitude}} radius={district.radius} options={options}/>
 
         })
       }
       {
-        circleAreas.map(district => {
+        props.circleAreas.map(district => {
           return (
-            <InfoWindow key={district.districtName} position={district.position}>
-              <div>{district.districtName} : {district.avgPrice} zł</div>
+            <InfoWindow key={district.name} position={{lat: district.latitude, lng: district.longitude}}>
+              <div>{district.name} : {district.price} zł</div>
             </InfoWindow>
           )
         })
@@ -213,6 +224,10 @@ const SimpleMapExampleGoogleMap = withGoogleMap(props => {
 });
 
 class AvgPriceForDistrictMap extends Component {
+  constructor(props){
+    super(props);
+    this.props.getDistrictData();
+  }
   render() {
     return (
       <ListGroup>
@@ -226,6 +241,7 @@ class AvgPriceForDistrictMap extends Component {
           padding: 0
         }}>
           <SimpleMapExampleGoogleMap
+            circleAreas={this.props.districtData}
             lat={this.props.lat}
             lng={this.props.lng}
             containerElement={
@@ -246,4 +262,16 @@ class AvgPriceForDistrictMap extends Component {
   }
 }
 
-export default AvgPriceForDistrictMap;
+const mapStateToProps = (state) => {
+  return {
+    districtData: state.serverData.districtData,
+  }
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    getDistrictData: () => dispatch(getDistrictData())
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AvgPriceForDistrictMap);

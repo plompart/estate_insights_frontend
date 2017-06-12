@@ -39,7 +39,7 @@ class BubbleGraph extends Component {
           }
         ]
       }
-    }
+    };
     this.props.getBubbleGraphData();
   }
   componentWillReceiveProps(newProps){
@@ -92,7 +92,7 @@ class BubbleGraph extends Component {
               Wyślij
             </Button>
           </ListGroupItem>
-          <ListGroupItem><Bubble data={this.state.data} />{console.log(this.state)}</ListGroupItem>
+          <ListGroupItem><Bubble data={this.state.data} /></ListGroupItem>
         </ListGroup>
       </div>
     )
@@ -100,7 +100,6 @@ class BubbleGraph extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     data: state.serverData.bubbleGraphData,
   }
