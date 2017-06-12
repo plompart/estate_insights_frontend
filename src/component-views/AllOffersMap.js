@@ -32,8 +32,9 @@ const SimpleMapExampleGoogleMap = withGoogleMap(props => {
         enableRetinaIcons
         gridSize={60}
       >
-        {props.markers.map(marker => (
+        {props.markers.map((marker, index) => (
           <Marker
+            key={index}
             position={{lat: marker.latitude, lng: marker.longitude}}
           />
         ))}

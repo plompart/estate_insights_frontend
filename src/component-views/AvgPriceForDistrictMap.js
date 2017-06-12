@@ -179,7 +179,8 @@ const SimpleMapExampleGoogleMap = withGoogleMap(props => {
       defaultCenter={{lat: props.lat, lng: props.lng}}
     >
       {
-        props.circleAreas.map(district => {
+        props.circleAreas.map((district, index) => {
+          console.log(props.circleAreas);
           let options;
           if (district.price > maxPrice * 0.66) {
             options = {
@@ -206,17 +207,25 @@ const SimpleMapExampleGoogleMap = withGoogleMap(props => {
               strokeWeight: 1,
             }
           }
-          return <Circle key={district.name} center={{lat: district.latitude, lng: district.longitude}} radius={district.radius} options={options}/>
+          return <span>
+            <Circle
+              key={index}
+              center={{lat: district.latitude, lng: district.longitude}}
+              radius={district.radius}
+              options={options}
+              onClick={() => props.onMarkerClick(district)}
+            />
+            {district.showInfo && (
+              <InfoWindow
+                key={district.name}
+                position={{lat: district.latitude, lng: district.longitude}}
+                onCloseClick={() => props.onMarkerClose(district)}
+              >
+                <div>{district.name} : {Number(district.price).toFixed(2)} zł</div>
+              </InfoWindow>
+            )}
+          </span>
 
-        })
-      }
-      {
-        props.circleAreas.map(district => {
-          return (
-            <InfoWindow key={district.name} position={{lat: district.latitude, lng: district.longitude}}>
-              <div>{district.name} : {district.price} zł</div>
-            </InfoWindow>
-          )
         })
       }
     </GoogleMap>
@@ -227,7 +236,59 @@ class AvgPriceForDistrictMap extends Component {
   constructor(props){
     super(props);
     this.props.getDistrictData();
+    this.state = {
+      circles: this.addedShowInfo(this.props),
+    };
+
+    console.log(this.state);
   }
+
+  addedShowInfo(props){
+    return Object.values(props.districtData).map((value) => {
+      return {
+        ...value,
+        showInfo: false,
+      }
+    })
+  }
+
+  componentWillReceiveProps(newProps) {
+    this.setState({
+      circles: this.addedShowInfo(newProps)
+    })
+  }
+
+  handleMarkerClick = this.handleMarkerClick.bind(this);
+  handleMarkerClose = this.handleMarkerClose.bind(this);
+
+  handleMarkerClick(targetMarker) {
+    this.setState({
+      circles: this.state.circles.map(circle => {
+        if (circle === targetMarker) {
+          return {
+            ...circle,
+            showInfo: true,
+          };
+        }
+        return circle;
+      }),
+    });
+  }
+
+  handleMarkerClose(targetMarker) {
+    this.setState({
+      circles: this.state.circles.map(circle => {
+        if (circle === targetMarker) {
+          return {
+            ...circle,
+            showInfo: false,
+          };
+        }
+        return circle;
+      }),
+    });
+  }
+
   render() {
     return (
       <ListGroup>
@@ -241,7 +302,9 @@ class AvgPriceForDistrictMap extends Component {
           padding: 0
         }}>
           <SimpleMapExampleGoogleMap
-            circleAreas={this.props.districtData}
+            onMarkerClick={this.handleMarkerClick}
+            onMarkerClose={this.handleMarkerClose}
+            circleAreas={this.state.circles}
             lat={this.props.lat}
             lng={this.props.lng}
             containerElement={
