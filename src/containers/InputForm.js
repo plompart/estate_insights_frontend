@@ -3,35 +3,23 @@
  */
 
 import React, {Component} from 'react';
-import {Button, Col, Grid, PageHeader, Row} from "react-bootstrap";
+import {Col, Grid, PageHeader, Row} from "react-bootstrap";
 import MyHeader from "../components/MyHeader";
 import ReactDOM from "react-dom";
 import Body from "./Body";
-import {Provider} from "react-redux";
-import LocationDiv from "./LocationDiv";
-import MainInfoDiv from "../containers/MainInfoDiv";
-import EquipmentDiv from "../containers/EquipmentDiv";
+import {Provider, connect} from "react-redux";
+import Location from "../components/Location";
+import MainInfo from "../components/MainInfo";
+import Equipment from "../components/Equipment";
+import {getAdditionalFeatures, getEquipmentNames, submitCoordinates, submitData, submitHistData} from "../actions/index"
+import {Form} from "react-redux-form";
+import AdditionalInfo from "../components/AdditionalInfo";
 
 class InputForm extends Component {
-  onChangeHandler(propName, event) {
-    if(event !== undefined) {
-      this.setState({[propName]: event.target.checked})
-      // dispatch(changeCheckboxData(propName, event.target.checked));
-    }
-  }
-
-  onBlurHandler(propName, event) {
-    if(event !== undefined) {
-      this.setState({[propName]: event.target.value})
-
-    }
-  }
-
   constructor(props) {
     super(props);
-    this.state = {
-      buildingType: "blok"
-    };
+    this.props.getAdditionalFeatures();
+    this.props.getEquipmentNames();
   }
 
   render() {
@@ -43,35 +31,63 @@ class InputForm extends Component {
               <MyHeader/>
             </Col>
           </Row>
-          <Row className="show-grid first">
-            <Col xs={12} md={8} xsOffset={3} mdOffset={2}>
-              <PageHeader>Wypełnij formularz by uzyskać wycenę mieszkania:</PageHeader>
-              <LocationDiv/>
-            </Col>
-          </Row>
-          <Row className="show-grid">
-            <Col xs={12} md={8} xsOffset={3} mdOffset={2}>
-              <MainInfoDiv/>
-            </Col>
-          </Row>
-          <Row className="show-grid">
-            <Col xs={12} md={8} xsOffset={3} mdOffset={2}>
-              <EquipmentDiv/>
-            </Col>
-          </Row>
-          <Row className="show-grid" >
-            <Col xs={12} md={8} xsOffset={3} mdOffset={2} style={{textAlign: "center"}}>
-              <Button onClick={() => ReactDOM.render(<Provider store={this.props.store}>
-                                                      <Body />
-                                                    </Provider>, document.getElementById('body'))}>
-                Zapisz
-              </Button>
-            </Col>
-          </Row>
+          <Form
+            model="form.inputForm"
+            onSubmit={() => {
+              this.props.submitCoordinates();
+              this.props.submitData();
+              this.props.submitHistData("hist_price_per_sqm");
+              this.props.submitHistData("hist_area");
+              ReactDOM.render(<Provider store={this.props.store}>
+                <Body />
+              </Provider>, document.getElementById('body'))
+            }}
+          >
+            <Row className="show-grid first">
+              <Col xs={12} md={8} xsOffset={3} mdOffset={2}>
+                <PageHeader>Wypełnij formularz by uzyskać wycenę mieszkania:</PageHeader>
+                <Location/>
+              </Col>
+            </Row>
+            <Row className="show-grid">
+              <Col xs={12} md={8} xsOffset={3} mdOffset={2}>
+                <MainInfo/>
+              </Col>
+            </Row>
+            <Row className="show-grid">
+              <Col xs={12} md={8} xsOffset={3} mdOffset={2}>
+                <AdditionalInfo/>
+              </Col>
+            </Row>
+            <Row className="show-grid">
+              <Col xs={12} md={8} xsOffset={3} mdOffset={2}>
+                <Equipment/>
+              </Col>
+            </Row>
+            <Row className="show-grid" >
+              <Col xs={12} md={8} xsOffset={3} mdOffset={2} style={{textAlign: "center"}}>
+                <button type="submit" className="btn btn-default">
+                  Wyceń
+                </button>
+              </Col>
+            </Row>
+          </Form>
         </Grid>
       </div>
     )
   }
 }
 
-export default InputForm;
+const mapStateToProps = (state) => state;
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    submitData: () => dispatch(submitData()),
+    submitCoordinates: () => dispatch(submitCoordinates()),
+    submitHistData: (type) => dispatch(submitHistData(type)),
+    getAdditionalFeatures: () => dispatch(getAdditionalFeatures()),
+    getEquipmentNames: () => dispatch(getEquipmentNames()),
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(InputForm)

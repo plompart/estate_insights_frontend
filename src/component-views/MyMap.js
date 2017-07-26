@@ -3,13 +3,14 @@ import {
   withGoogleMap,
   GoogleMap, Marker,
 } from "react-google-maps";
-import icon from './icon.png';
+import {connect} from "react-redux";
+import {submitCoordinates} from "../actions/index";
 
 const SimpleMapExampleGoogleMap = withGoogleMap(props => {
   return (
     <GoogleMap
-      defaultZoom={15}
-      defaultCenter={{lat: 50.07949, lng: 19.948897}}
+      defaultZoom={11}
+      defaultCenter={{lat: props.lat, lng: props.lng}}
     >
       {props.markers.map(marker => (
         <Marker
@@ -20,20 +21,21 @@ const SimpleMapExampleGoogleMap = withGoogleMap(props => {
   );
 });
 
-export default class MyMap extends Component {
-  state = {
-    markers: [{
-      position: {
-        lat: 50.079490,
-        lng: 19.948897,
-      },
-      key: `Cracow`,
-      defaultAnimation: 4,
-      //icon: icon
-    }],
-  };
-
+class MyMap extends Component {
   render() {
+    this.props.submitCoordinates();
+
+    let state = {
+      markers: [{
+        position: {
+          lat: this.props.lat,
+          lng: this.props.lng,
+        },
+        key: `Cracow`,
+        defaultAnimation: 4,
+        //icon: icon
+      }],
+    };
     return (
       <div className="MyMap" style={{
         height: 300,
@@ -44,6 +46,8 @@ export default class MyMap extends Component {
         padding: 0
       }}>
         <SimpleMapExampleGoogleMap
+          lat={this.props.lat}
+          lng={this.props.lng}
           containerElement={
             <div
               style={{
@@ -55,9 +59,24 @@ export default class MyMap extends Component {
           mapElement={
             <div style={{height: `100%`}}/>
           }
-          markers={this.state.markers}
+          markers={state.markers}
         />
       </div>
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    lat: state.coordinates.lat,
+    lng: state.coordinates.lng
+  }
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    submitCoordinates: () => dispatch(submitCoordinates())
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyMap);

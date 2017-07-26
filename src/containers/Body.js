@@ -5,14 +5,17 @@
 import React, {Component} from 'react';
 import MyHeader from "../components/MyHeader";
 import {Col, Grid, PageHeader, Row} from "react-bootstrap";
-import MyMap from "../components/MyMap";
-import LocationViewDiv from "../containers/LocationViewDiv";
-import Valuation from "../components/Valuation";
-import EquipmentViewDiv from "../containers/EquipmentViewDiv";
-import LineGraph from "../components/LineGraph";
-import BarGraph from "../components/BarGraph";
+import MyMap from "../component-views/MyMap";
+import LocationView from "../component-views/LocationView";
+import Valuation from "../component-views/Valuation";
+import EquipmentView from "../component-views/EquipmentView";
+import BarGraph from "../component-views/BarGraph";
 import SidePanel from "./SidePanel";
-import MainInfoViewDiv from "../containers/MainInfoViewDiv";
+import MainInfoView from "../component-views/MainInfoView";
+import AvgPriceForDistrictMap from "../component-views/AvgPriceForDistrictMap";
+import AllOffersMap from "../component-views/AllOffersMap";
+import BubbleGraph from "../component-views/BubbleGraph";
+import AdditionalInfoView from "../component-views/AdditionalInfoView";
 
 class Body extends Component {
   render() {
@@ -42,30 +45,45 @@ class Body extends Component {
               </Row>
               <Row className="show-grid">
                 <Col xs={12} md={8} xsOffset={3} mdOffset={2}>
-                  <LocationViewDiv/>
+                  <LocationView/>
                 </Col>
               </Row>
               <Row className="show-grid">
                 <Col xs={12} md={8} xsOffset={3} mdOffset={2}>
-                  <MainInfoViewDiv/>
+                  <MainInfoView/>
                 </Col>
               </Row>
               <Row className="show-grid">
                 <Col xs={12} md={8} xsOffset={3} mdOffset={2}>
-                  <EquipmentViewDiv/>
+                  <AdditionalInfoView/>
                 </Col>
               </Row>
               <Row className="show-grid">
                 <Col xs={12} md={8} xsOffset={3} mdOffset={2}>
-                  <LineGraph/>
+                  <EquipmentView/>
                 </Col>
               </Row>
               <Row className="show-grid">
                 <Col xs={6} md={4} xsOffset={3} mdOffset={2}>
-                  <BarGraph type="prices"/>
+                  <BarGraph type="hist_price_per_sqm"/>
                 </Col>
                 <Col xs={6} md={4}>
-                  <BarGraph type="surfaces"/>
+                  <BarGraph type="hist_area"/>
+                </Col>
+              </Row>
+              <Row className="show-grid">
+                <Col xs={12} md={8} xsOffset={3} mdOffset={2}>
+                  <AvgPriceForDistrictMap lat={50.060491} lng={19.9235729}/>
+                </Col>
+              </Row>
+              <Row className="show-grid">
+                <Col xs={12} md={8} xsOffset={3} mdOffset={2}>
+                  <AllOffersMap lat={50.060491} lng={19.9235729}/>
+                </Col>
+              </Row>
+              <Row className="show-grid">
+                <Col xs={12} md={8} xsOffset={3} mdOffset={2}>
+                  <BubbleGraph/>
                 </Col>
               </Row>
             </Grid>
